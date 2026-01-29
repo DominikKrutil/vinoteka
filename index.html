@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinotéka u Šenkyříků</title>
+
+    <!-- link na styly -->
+    <link rel="stylesheet" href="styly.css">
+
+    <!-- Google Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Love+Light&family=Montserrat:wght@100..900&family=Playfair+Display:wght@400..900&display=swap" rel="stylesheet">
+
+
+    <!-- Font Awesome ikony -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        
+        <div>
+            <a href="#" class="logo">Vinotéka U Šenkyříků</a>
+        </div>
+        
+        <button><i id="menu-open" class="fas fa-bars icons"></i></button>
+        
+        <nav class="nav-desktop">
+            <ul class="nav-list">
+                <li class="nav-li"><a href="#offer" class="nav-item">Nabídka vín</a></li>
+                <li class="nav-li"><a href="#" class="nav-item">O vinotéce</a></li>
+                <li class="nav-li"><a href="#" class="nav-item">Fotogalerie</a></li>
+                <li class="nav-li"><a href="#" class="nav-item">Kontakt</a></li>
+            </ul>
+        </nav>
+            
+        <nav class="nav-mobile">
+            <ul class="nav-list">
+                <i id="menu-close" class="fas fa-times icons"></i>
+                <li class="nav-li"><a href="#offer" class="nav-item">Nabídka vín</a></li>
+                <li class="nav-li"><a href="#" class="nav-item">o Vinotéce</a></li>
+                <li class="nav-li"><a href="#" class="nav-item">Fotogalerie</a></li>
+                <li class="nav-li"><a href="#" class="nav-item">Kontakt</a></li>
+                <li id="nav-contact1" class="nav-contact"> <strong>Tel:</strong> +420 123 456 789</li>
+                <li class="nav-contact"> <strong>Mail:</strong> user@gmail.com</li>
+            </ul>
+        </nav>
+
+    </header>
+    <section id="hero">
+        
+        <h1>U Šenkyříků</h1>
+        <p class="hero-subtitle">Nejlepší vinotéka v Holešově</p>
+
+        <div class="hero-icons">       
+            <a href="#offer"><i class="fas fa-chevron-down icons"></i></a></i>
+            <i class="fas fa-image icons"></i>
+            <i class="fas fa-phone icons"></i>
+        </div>
+    
+    </section>
+    
+    <section id="offer">
+        <div class="offer-header">
+            <h2>Nabídka vín</h2>
+            <div class="offer-underline"></div>
+            <p class="offer-subtitle">Pečlivě vybraná vína z Moravy i světa</p>
+        </div>
+
+        <div class="offer-images-wrapper">
+            <div class="offer-images">
+                <div class="offer-image">
+                    <img src="obrazky/vino.jpg" alt="">
+                </div>
+                <div class="offer-image">
+                    <img src="obrazky/vino2.jpg" alt="">
+                </div>
+                <div class="offer-image">
+                    <img src="obrazky/vino.jpg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <p class="offer-article">
+            V naší vinotéce najdete pečlivě vybranou nabídku vín z moravských i zahraničních vinic, která vzniká s důrazem na kvalitu, původ a charakter každé láhve. Spolupracujeme s poctivými vinaři, kteří své řemeslo dělají s respektem k tradici i moderním postupům. Nabízíme vína pro každodenní posezení, rodinné oslavy i výjimečné chvíle, kdy chcete sáhnout po něčem opravdu speciálním. Rádi vám osobně poradíme s výběrem tak, aby víno vždy ladilo s příležitostí, chutí i náladou.
+        </p>
+    </section>
+    <section id="vinoteka">
+
+    </section>
+    
+    <script>
+        // header při scrollu
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+        if(window.scrollY > 50){
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        });
+        
+        // hamburger menu
+        const menuOpen = document.getElementById('menu-open');
+        const menuClose = document.getElementById('menu-close');
+        const navMobile = document.querySelector('.nav-mobile');
+
+        menuOpen.addEventListener('click', () => {
+            navMobile.classList.add('open');
+        });
+
+        menuClose.addEventListener('click', () => {
+            navMobile.classList.remove('open');
+        });
+        
+        // zavření hamburger menu po kliknutí na odkaz
+        const mobileLinks = document.querySelectorAll('.nav-mobile .nav-item');
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMobile.classList.remove('open');
+            });
+        });
+
+        //offer image slider
+        const offerImages = document.querySelector('.offer-images');
+
+        function centerSlider() {
+            const screenWidth = window.innerWidth;
+
+            if (screenWidth <= 1000) {
+                const images = offerImages.querySelectorAll('.offer-image');
+                if (images.length < 3) return;
+
+                const containerWidth = offerImages.clientWidth;
+                const middleIndex = Math.floor(images.length / 2);
+                const middleImage = images[middleIndex];
+
+                const scrollPosition = middleImage.offsetLeft - (containerWidth / 2) + (middleImage.offsetWidth / 2);
+                offerImages.scrollLeft = scrollPosition;
+            } else {
+                offerImages.scrollLeft = 0;
+        }
+        }
+
+        centerSlider();
+        window.addEventListener('resize', centerSlider);
+    </script>
+</body>
+</html>
